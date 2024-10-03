@@ -1,6 +1,7 @@
 package com.melis.security.config;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -23,10 +24,9 @@ public class SecurityConfiguration {
 
 
         http
-                .csrf()
-                .disable()
+                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeRequests()
-                .requestMatchers("")
+                .requestMatchers("/api/v1/auth/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
